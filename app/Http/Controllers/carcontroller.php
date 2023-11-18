@@ -13,12 +13,15 @@ class carcontroller extends Controller
         return view("addcar");
     }
 
-    public function cars(Request $request)
+    public function carsform(Request $request)
     {
         $post = new cars;
-        $post->title = $request->title;
+        $post->carTitle = $request->carTitle;
+        $post->price = $request->price;
         $post->description = $request->description;
+        $post->published = $request->published;
         $post->save();
-        return redirect('addcar')->with('status', 'cars Data Has Been inserted');
+        return redirect('cars-form')->with('status', 'cars Data Has Been inserted');
     }
+ 
 }

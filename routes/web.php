@@ -197,12 +197,16 @@ Route::post ('receive',function(){
 Route::get('test1',[ExampleController::class,'test1']);
 
 Route::get('addcar',[carcontroller::class,'index']);
-Route::post('cars-form', [carcontroller::class, 'cars']);
+Route::post('cars-form', [carcontroller::class, 'carsform']);
 
-// Route::get ('addcar',function(){
+ Route::get ('addcar',function(){
        
-//     return view('addcar') ;
-// });
+     return view('addcar') ;
+ });
+ Route::get ('cars-form',function(){
+       
+    return view('cars-form') ;
+});
 // Route::post ('receive',function(){ 
 //     return 'Data received';
 // })->name('received');
