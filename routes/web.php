@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\carcontroller;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -118,25 +122,87 @@ Route::get('test',function(){
 //     return $msg ;
 // })->whereIn('name',['Mahitab', 'taha']);
 
+
+Route::get ('About',function(){
+       
+    return 'About page' ;
+});
+
+Route::get ('contact',function(){
+       
+    return 'contact page' ;
+});
+
 //prefix group
 
-Route::prefix('product')->group(function(){
+Route::prefix('Support')->group(function(){
 
     Route::get ('/',function(){
        
-        return 'product page' ;
+        return 'Support page' ;
     });
-    Route::get ('laptop',function(){
+    Route::get ('Chat',function(){
        
-        return 'laptop page' ;
+        return 'Chat page' ;
     });
-    Route::get ('pc',function(){
-       
-        return 'pc' ;
+    Route::get ('Call',function(){
+        return 'Call' ;
     });
-    Route::get ('camera',function(){
+    Route::get ('Ticket',function(){
        
-        return 'camera page' ;
+        return 'Ticket page' ;
+    });
+});
+Route::prefix('Training')->group(function(){
+
+    Route::get ('/',function(){
+       
+        return 'HR page' ;
+    });
+    Route::get ('ICT',function(){
+       
+        return 'ICT page' ;
+    });
+    Route::get ('Marketing ',function(){
+       
+        return 'Marketing' ;
+    });
+    Route::get ('Logistics',function(){
+       
+        return 'Logistics page' ;
     });
 
 });
+
+//for redirection
+Route::fallback(function(){ 
+    return redirect('/') ;
+});
+
+Route::get ('cv',function(){
+       
+    return view('cv') ;
+});
+Route::get ('login',function(){
+       
+    return view('login') ;
+});
+
+
+Route::post ('receive',function(){ 
+    return 'Data received';
+})->name('receive');
+
+
+Route::get('test1',[ExampleController::class,'test1']);
+
+Route::get('addcar',[carcontroller::class,'index']);
+Route::post('cars-form', [carcontroller::class, 'cars']);
+
+// Route::get ('addcar',function(){
+       
+//     return view('addcar') ;
+// });
+// Route::post ('receive',function(){ 
+//     return 'Data received';
+// })->name('received');
