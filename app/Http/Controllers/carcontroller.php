@@ -13,7 +13,6 @@ class CarController extends Controller
     public function index()
     {
         //
-        return view("addcar");
     }
 
     /**
@@ -22,6 +21,7 @@ class CarController extends Controller
     public function create()
     {
         //
+        return view("addcar");
         
     }
 
@@ -32,13 +32,34 @@ class CarController extends Controller
     {
         //
         {
-            $post = new cars;
-            $post->carTitle = $request->carTitle;
-            $post->price = $request->price;
-            $post->description = $request->description;
-            $post->published = $request->published;
-            $post->save();
+            $cars = new cars;
+
+            $cars->carTitle = $request->carTitle;
+            $cars->price = $request->price;
+            $cars->description = $request->description;
+            // $published = $request->published;
+            // if($published){
+            //     $cars->published = 1;
+            // }
+            // else{
+            //     $cars->published = 0;
+            // }
+            if(isset($request->published)){
+                $cars->published = true;
+            }else{
+                $cars->published = false;
+            }
+            
+            $cars->save();
             return "your car title is " . $request->carTitle . "<br> and price is " . $request->price . "<br>  and description is " . $request->description . "<br>  and published is " . $request->published;
+
+            // $car = new cars;
+            // $car->carTitle = "BMW";
+            // $car->price = 10000;
+            // $car->description = "This is a BMW";
+            // $car->published = 1;
+            // $car->save();
+            // return "cars added successfully";
         }
      
     }

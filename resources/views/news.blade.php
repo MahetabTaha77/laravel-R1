@@ -16,25 +16,25 @@
         {{ session('status') }}
     </div>
   @endif
-  <h2>Add Car</h2>
-  <form name="addcar" id="addcar" method="post" action="{{url('cars-data')}}">
+  <h2>Add News</h2>
+  <form name="addnews" id="addnews" method="post" action="{{url('news-data')}}">
 
     @csrf
     <div class="form-group">
       <label for="title">Title:</label>
-      <input type="text" class="form-control" id="title" placeholder="Enter title" name="carTitle">
+      <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
     </div>
     <div class="form-group">
-      <label for="price">Price:</label>
-      <input type="number" class="form-control" id="price" placeholder="Enter Price" name="price">
+      <label for="Content">Content:</label>
+      <input type="text" class="form-control" id="Content" placeholder="Enter Content" name="content">
     </div>
-    <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
-      </div> 
     <div class="checkbox">
       <label><input type="checkbox" name="published"> Published</label>
     </div>
+    <div class="form-group">
+        <label for="author">Author:</label>
+        <textarea class="form-control" rows="5" id="author" name="author"></textarea>
+      </div> 
     <button type="submit" class="btn btn-default">Add</button>
   </form>
 </div>

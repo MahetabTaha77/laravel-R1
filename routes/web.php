@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\NewsController;
 
 
 
@@ -24,8 +25,11 @@ Route::get('/', function () {
 //     return ('welcome to our site');
 // });
 
-Route::get('addcar',[CarController::class,'index']);
-Route::post('cars-form', [CarController::class, 'store']);
+Route::get('addcar',[CarController::class,'create']);
+Route::post('cars-data', [CarController::class,'store'])->name('cars-data');
+
+Route::get('news',[NewsController::class,'create']);
+Route::post('news-data', [NewsController::class,'store'])->name('news-data');
 // Route::get('user/{name}',function($name){
 //     return ('The User Name Is:' .$name);
 // });
