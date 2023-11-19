@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
-use App\Http\Controllers\carcontroller;
+use App\Http\Controllers\CarController;
 
 
 
@@ -20,9 +20,12 @@ use App\Http\Controllers\carcontroller;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('test',function(){
-    return ('welcome to our site');
-});
+// Route::get('test',function(){
+//     return ('welcome to our site');
+// });
+
+Route::get('addcar',[CarController::class,'index']);
+Route::post('cars-form', [CarController::class, 'store']);
 // Route::get('user/{name}',function($name){
 //     return ('The User Name Is:' .$name);
 // });
@@ -123,90 +126,86 @@ Route::get('test',function(){
 // })->whereIn('name',['Mahitab', 'taha']);
 
 
-Route::get ('About',function(){
+// Route::get ('About',function(){
        
-    return 'About page' ;
-});
+//     return 'About page' ;
+// });
 
-Route::get ('contact',function(){
+// Route::get ('contact',function(){
        
-    return 'contact page' ;
-});
+//     return 'contact page' ;
+// });
 
-//prefix group
+// //prefix group
 
-Route::prefix('Support')->group(function(){
+// Route::prefix('Support')->group(function(){
 
-    Route::get ('/',function(){
+//     Route::get ('/',function(){
        
-        return 'Support page' ;
-    });
-    Route::get ('Chat',function(){
+//         return 'Support page' ;
+//     });
+//     Route::get ('Chat',function(){
        
-        return 'Chat page' ;
-    });
-    Route::get ('Call',function(){
-        return 'Call' ;
-    });
-    Route::get ('Ticket',function(){
+//         return 'Chat page' ;
+//     });
+//     Route::get ('Call',function(){
+//         return 'Call' ;
+//     });
+//     Route::get ('Ticket',function(){
        
-        return 'Ticket page' ;
-    });
-});
-Route::prefix('Training')->group(function(){
+//         return 'Ticket page' ;
+//     });
+// });
+// Route::prefix('Training')->group(function(){
 
-    Route::get ('/',function(){
+//     Route::get ('/',function(){
        
-        return 'HR page' ;
-    });
-    Route::get ('ICT',function(){
+//         return 'HR page' ;
+//     });
+//     Route::get ('ICT',function(){
        
-        return 'ICT page' ;
-    });
-    Route::get ('Marketing ',function(){
+//         return 'ICT page' ;
+//     });
+//     Route::get ('Marketing ',function(){
        
-        return 'Marketing' ;
-    });
-    Route::get ('Logistics',function(){
+//         return 'Marketing' ;
+//     });
+//     Route::get ('Logistics',function(){
        
-        return 'Logistics page' ;
-    });
+//         return 'Logistics page' ;
+//     });
 
-});
+// });
 
-//for redirection
-Route::fallback(function(){ 
-    return redirect('/') ;
-});
+// //for redirection
+// Route::fallback(function(){ 
+//     return redirect('/') ;
+// });
 
-Route::get ('cv',function(){
+// Route::get ('cv',function(){
        
-    return view('cv') ;
-});
-Route::get ('login',function(){
+//     return view('cv') ;
+// });
+// Route::get ('login',function(){
        
-    return view('login') ;
-});
-
-
-Route::post ('receive',function(){ 
-    return 'Data received';
-})->name('receive');
+//     return view('login') ;
+// });
 
 
-Route::get('test1',[ExampleController::class,'test1']);
+// Route::post ('receive',function(){ 
+//     return 'Data received';
+// })->name('receive');
 
-Route::get('addcar',[carcontroller::class,'index']);
-Route::post('cars-form', [carcontroller::class, 'carsform']);
+// Route::get('test1',[ExampleController::class,'test1']);
 
- Route::get ('addcar',function(){
+//  Route::get ('addcar',function(){
        
-     return view('addcar') ;
- });
- Route::get ('cars-form',function(){
+//      return view('addcar') ;
+//  });
+//  Route::get ('cars-form',function(){
        
-    return view('cars-form') ;
-});
+//     return view('cars-form') ;
+// });
 // Route::post ('receive',function(){ 
 //     return 'Data received';
 // })->name('received');
