@@ -26,13 +26,13 @@
     </div>
     <div class="form-group">
       <label for="price">content:</label>
-      <input type="number" class="form-control" id="content" placeholder="Enter content" name="content">
+      <input type="text" class="form-control" id="content" placeholder="Enter content" name="content">
     </div>
     <div class="checkbox">
       <label><input type="checkbox" name="published"> Published</label>
     </div>
     <div class="form-group">
-        <label for="description">Author:</label>
+        <label for="author">Author:</label>
         <textarea class="form-control" rows="5" id="author" name="author"></textarea>
       </div> 
     <button type="submit" class="btn btn-default">Add</button>

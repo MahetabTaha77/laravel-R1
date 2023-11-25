@@ -19,6 +19,7 @@
         <th>Title</th>
         <th>Content</th>
         <th>Publish</th>
+        <th>author</th>
         <th>Edit</th>
 
       </tr>
@@ -36,6 +37,7 @@
             no  ❌  
             @endif
         </td>
+        <td> {{ $news->author}} </td>
         <td><a href="editnews/{{ $news->id }}" >Edit</a</td>
 
       </tr>

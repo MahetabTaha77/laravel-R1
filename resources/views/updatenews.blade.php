@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
       <label for="Content">Content:</label>
-      <input type="text" class="form-control" id="Content" placeholder="Enter Content" name="content" value="{{ $news->content }}">
+      <input type="text" class="form-control" id="content" placeholder="Enter Content" name="content" value="{{ $news->content }}">
     </div>
     <div class="checkbox">
       <label><input type="checkbox" name="published" @checked($news->published)> Published</label>
@@ -34,7 +34,7 @@
     </div>
     <div class="form-group">
       <label for="Content">Author:</label>
-      <input type="text" class="form-control" id="author" placeholder="Enter author" name="author" value="{{ $news->author }}">
+      <textarea class="form-control" rows="5" id="author" name="author">{{$news->author}}</textarea>
     </div>
 
     <button type="submit" class="btn btn-default">update</button>
