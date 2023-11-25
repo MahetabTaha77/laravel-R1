@@ -13,6 +13,8 @@ class CarController extends Controller
     public function index()
     {
         //
+        $cars = cars::get();
+        return view("cars" ,compact('cars'));
     }
 
     /**
@@ -77,7 +79,9 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
-        //
+       //for display form database row values
+       $cars=cars::findOrFail($id);
+       return view("updatecar",compact('cars'));
     }
 
     /**
@@ -85,7 +89,7 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**

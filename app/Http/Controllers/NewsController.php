@@ -14,6 +14,8 @@ class NewsController extends Controller
     public function index()
     {
         //
+        $news = news::get();
+        return view("news" ,compact('news'));
     }
 
     /**
@@ -35,9 +37,11 @@ class NewsController extends Controller
 
         $news->title = $request->title;
         $news->content = $request->content;
-        if(isset($request->published)){
+        if(isset($request->published))
+        {
             $news->published = true;
-        }else{
+        }
+        else{
             $news->published = false;
         }
         $news->author = $request->author;
@@ -60,6 +64,8 @@ class NewsController extends Controller
     public function edit(string $id)
     {
         //
+        $news=news::findOrFail($id);
+        return view("updatenews",compact('news'));
     }
 
     /**

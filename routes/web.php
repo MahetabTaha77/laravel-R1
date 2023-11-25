@@ -28,8 +28,18 @@ Route::get('/', function () {
 Route::get('addcar',[CarController::class,'create']);
 Route::post('cars-data', [CarController::class,'store'])->name('cars-data');
 
-Route::get('news',[NewsController::class,'create']);
+Route::get('addnews',[NewsController::class,'create']);
 Route::post('news-data', [NewsController::class,'store'])->name('news-data');
+
+Route::get('cars',[CarController::class,'index']);
+Route::get('editCar/{id}', [CarController::class,'edit']);
+Route::put('updatecar/{id}', [CarController::class,'update'])->name('updatecar');
+
+Route::get('news',[NewsController::class,'index']);
+Route::get('editnews/{id}', [NewsController::class,'edit']);
+Route::put('updatenews/{id}', [NewsController::class,'update'])->name('updatenews');
+
+
 // Route::get('user/{name}',function($name){
 //     return ('The User Name Is:' .$name);
 // });
