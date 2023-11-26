@@ -11,41 +11,24 @@
 <body>
 
 <div class="container">
-  <h2> Car Table</h2>
+  <h2> News Detalils</h2>
   <p>The .table-hover class enables a hover state on table rows:</p>            
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Publish</th>
-        <th>Edit</th>
-        <th>Show</th>
-        <th>Delete</th>
-
+        <th>news Title : {{ $news->title}} </th><br>
+      </tr>
+      <tr>
+      <th>Description : {{ $news->content}}</th><br>
+      </tr>
+      <tr>
+      <th>Publish : {{ $news->published}}</th><br>
+      </tr>
+      <tr>
+      <th>Author : {{ $news->author}}</th><br>
       </tr>
     </thead>
-    <tbody>
-        @foreach($cars as $cars)
-        <tr>
-        <td>{{ $cars->carTitle}}</td>
-        <td> {{ $cars->description}} </td>
-        <td>
-            @if ($cars->published)
-            yes ✅
-            @else
-            no  ❌  
-            @endif
-        </td>
-        <td><a href="editCar/{{ $cars->id }}" >Edit</a</td>
-        <td><a href="Showcars/{{ $cars->id }}" >Show</a</td>
-        <td><a href="deletecars/{{ $cars->id }}" >Delete</a</td>
-
-
-      </tr>
-        @endforeach
-      
-    </tbody>
+    
   </table>
 </div>
 

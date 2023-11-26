@@ -25,7 +25,7 @@
       <input type="text" class="form-control" id="title" placeholder="Enter title" name="title">
     </div>
     <div class="form-group">
-      <label for="price">content:</label>
+      <label for="content">content:</label>
       <input type="text" class="form-control" id="content" placeholder="Enter content" name="content">
     </div>
     <div class="checkbox">

@@ -40,6 +40,14 @@ Route::get('editnews/{id}', [NewsController::class,'edit']);
 Route::put('updatenews/{id}', [NewsController::class,'update'])->name('updatenews');
 
 
+
+Route::get('Showcars/{id}', [CarController::class,'show'])->name('Showcars');
+Route::get('deletecars/{id}', [CarController::class,'destroy']);
+
+Route::get('shownews/{id}', [NewsController::class,'show'])->name('shownews');
+Route::get('deletenews/{id}', [NewsController::class,'destroy']);
+
+
 // Route::get('user/{name}',function($name){
 //     return ('The User Name Is:' .$name);
 // });

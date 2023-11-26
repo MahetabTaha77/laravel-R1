@@ -21,6 +21,8 @@
         <th>Publish</th>
         <th>author</th>
         <th>Edit</th>
+        <th>Show</th>
+        <th>Delete</th>
 
       </tr>
     
@@ -39,6 +41,8 @@
         </td>
         <td> {{ $news->author}} </td>
         <td><a href="editnews/{{ $news->id }}" >Edit</a</td>
+        <td><a href="shownews/{{ $news->id }}" >Show</a</td>
+        <td><a href="deletenews/{{ $news->id }}" >Delete</a</td>
 
       </tr>
         @endforeach

@@ -20,6 +20,7 @@
   <form name="addnews" id="addnews" method="post" action="{{ route('updatenews',$news->id)  }}">
 
     @csrf
+    @method('put')
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="text" class="form-control" id="title" placeholder="Enter title" name="title"  value="{{ $news->title }}">

@@ -31,7 +31,7 @@
 
     </div>
     <div class="form-group">
-        <label for="description">Content:</label>
+        <label for="description">Content :</label>
         <textarea class="form-control" rows="5" id="description" name="description"> {{$cars->description}}</textarea>
        
       </div> 
