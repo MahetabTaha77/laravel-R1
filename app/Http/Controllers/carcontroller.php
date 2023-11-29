@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+
 use App\Models\cars;
 
 class CarController extends Controller
@@ -40,11 +42,21 @@ class CarController extends Controller
     {
         //
         {
-            $cars = new cars;
+            // $cars = new cars;
 
-            $cars->carTitle = $request->carTitle;
-            $cars->price = $request->price;
-            $cars->description = $request->description;
+            // $cars->carTitle = $request->carTitle;
+            // $cars->price = $request->price;
+            // $cars->description = $request->description;
+            // if(isset($request->published)){
+            //     $cars->published = true;
+            // }else{
+            //     $cars->published = false;
+            // }
+            // $cars->save();
+            // return "your car title is " . $request->carTitle . "<br> and price is " . $request->price . "<br>  and description is " . $request->description . "<br>  and published is " . $request->published;
+
+
+            //-------------
             // $published = $request->published;
             // if($published){
             //     $cars->published = 1;
@@ -52,15 +64,25 @@ class CarController extends Controller
             // else{
             //     $cars->published = 0;
             // }
-            if(isset($request->published)){
-                $cars->published = true;
-            }else{
-                $cars->published = false;
-            }
-            
-            $cars->save();
-            return "your car title is " . $request->carTitle . "<br> and price is " . $request->price . "<br>  and description is " . $request->description . "<br>  and published is " . $request->published;
 
+            //validaion
+            $data = ($request->only($this->columns));
+            $data['published'] = isset($data['published'])? true:false;
+
+            $request-> validate(
+                [
+                    'carTitle'=> 'required | string',
+                    'price'=> 'required | integer',
+                    'description'=> 'required | string|max:100',
+                    // 'published'=> 'required | boolean',
+
+                ]
+                );
+                cars::create($data);
+                return "your car title is " . $request->carTitle . "<br> and price is " . $request->price . "<br>  and description is " . $request->description . "<br>  and published is " . $request->published;
+
+            
+            
             // $car = new cars;
             // $car->carTitle = "BMW";
             // $car->price = 10000;
@@ -108,10 +130,29 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
         //
         cars::where('id', $id)->delete();
         return redirect('cars');
     }
+    public function trashed()
+    {
+       //for display form database row values
+       $cars=cars::onlyTrashed()->get();
+       return view("trashedCar",compact('cars'));
+    }
+    public function restore(string $id)
+    {
+       //for display form database row values
+       cars::where('id',$id)->restore();
+       return redirect('cars');
+    }
+    public function Delete(string $id)
+    {
+       //for display form database row values
+       cars::where('id', $id)->forceDelete();
+       return redirect('cars');
+    }
+
 }

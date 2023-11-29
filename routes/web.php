@@ -47,6 +47,15 @@ Route::get('deletecars/{id}', [CarController::class,'destroy']);
 Route::get('shownews/{id}', [NewsController::class,'show'])->name('shownews');
 Route::get('deletenews/{id}', [NewsController::class,'destroy']);
 
+Route::get('trashedCar',[CarController::class,'trashed']);
+Route::get('restore/{id}', [CarController::class,'restore']);
+Route::get('delete/{id}', [CarController::class,'Delete']);
+
+
+
+Route::get('trashedNew',[NewsController::class,'trashed']);
+Route::get('restore/{id}', [NewsController::class,'restore']);
+Route::get('delete/{id}', [NewsController::class,'Delete']);
 
 // Route::get('user/{name}',function($name){
 //     return ('The User Name Is:' .$name);

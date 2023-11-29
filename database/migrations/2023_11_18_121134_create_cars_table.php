@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('price',100);
             $table->text('description');
             $table->boolean('published');
+            $table->softDeletes();//بيسجل المهزوف بالتسجيل و تاريج الحذف
             $table->timestamps();
         });
     }

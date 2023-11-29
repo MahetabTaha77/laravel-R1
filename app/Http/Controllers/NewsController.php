@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\news;
 
@@ -41,19 +41,34 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         //
-        $news = new news;
+        // $news = new news;
 
-        $news->title = $request->title;
-        $news->content = $request->content;
-        if(isset($request->published))
-        {
-            $news->published = true;
-        }
-        else{
-            $news->published = false;
-        }
-        $news->author = $request->author;
-        $news->save();
+        // $news->title = $request->title;
+        // $news->content = $request->content;
+        // if(isset($request->published))
+        // {
+        //     $news->published = true;
+        // }
+        // else{
+        //     $news->published = false;
+        // }
+        // $news->author = $request->author;
+        // $news->save();
+
+
+        $data = ($request->only($this->columns));
+            $data['published'] = isset($data['published'])? true:false;
+
+            $request-> validate(
+                [
+                    'title'=> 'required | string',
+                    'content'=> 'required | string|max:100',
+                    'author'=> 'required | string',
+                    // 'published'=> 'required | boolean',
+
+                ]
+                );
+                news::create($data);
         return "your News title is " . $request->title . "<br> and content is " . $request->content . "<br>  and published is " . $request->published  . "<br>  and author is " . $request->author ;
 
     }
@@ -95,10 +110,28 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id):RedirectResponse
     {
         //
         news::where('id', $id)->delete();
         return redirect('news');
+    }
+    public function trashed()
+    {
+       //for display form database row values
+       $news=news::onlyTrashed()->get();
+       return view("trashedNew",compact('news'));
+    }
+    public function restore(string $id)
+    {
+       //for display form database row values
+       news::where('id',$id)->restore();
+       return redirect('news');
+    }
+    public function Delete(string $id)
+    {
+       //for display form database row values
+       news::where('id', $id)->forceDelete();
+       return redirect('news');
     }
 }
