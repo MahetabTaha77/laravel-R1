@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Add Car</title>
+  <title>Add News</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -17,7 +17,7 @@
     </div>
   @endif
   <h2>Add News</h2>
-  <form name="addcar" id="addcar" method="post" action="{{url('news-data')}}">
+  <form name="addcar" id="addcar" method="post" action="{{url('news-data')}}"  enctype="multipart/form-data">
 
     @csrf
     <div class="form-group">
@@ -42,6 +42,13 @@
       <label><input type="checkbox" name="published"> Published</label>
     
     </div>
+    <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}">
+            @error('image')
+                {{ $message }}
+            @enderror
+        </div>
     <div class="form-group">
         <label for="author">Author:</label>
         <textarea class="form-control" rows="5" id="author" name="author">{{ old('author') }}</textarea>

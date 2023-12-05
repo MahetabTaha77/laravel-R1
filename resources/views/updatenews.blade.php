@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Add Car</title>
+  <title>Update News</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -16,7 +16,7 @@
         {{ session('status') }}
     </div>
   @endif
-  <h2>Add News</h2>
+  <h2>Update News</h2>
   <form name="addnews" id="addnews" method="post" action="{{ route('updatenews',$news->id)  }}">
 
     @csrf

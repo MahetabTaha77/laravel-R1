@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\NewsController;
+use App\Traits\common;
 
 
 
@@ -56,6 +57,11 @@ Route::get('delete/{id}', [CarController::class,'Delete']);
 Route::get('trashedNew',[NewsController::class,'trashed']);
 Route::get('restore/{id}', [NewsController::class,'restore']);
 Route::get('delete/{id}', [NewsController::class,'Delete']);
+
+
+Route::get('showupload',[ExampleController::class,'showupload']);
+Route::post('uploadImages',[ExampleController::class,'uploadImages'])->name('uploadImages');
+
 
 // Route::get('user/{name}',function($name){
 //     return ('The User Name Is:' .$name);

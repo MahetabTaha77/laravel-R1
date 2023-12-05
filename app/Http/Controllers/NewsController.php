@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\news;
+use App\Traits\common;
+
 
 
 class NewsController extends Controller
-{
+{   use common;
 
     private $columns=[
         'title',
@@ -56,18 +58,36 @@ class NewsController extends Controller
         // $news->save();
 
 
-        $data = ($request->only($this->columns));
-            $data['published'] = isset($data['published'])? true:false;
+        // $data = ($request->only($this->columns));
+        //     $data['published'] = isset($data['published'])? true:false;
 
-            $request-> validate(
-                [
-                    'title'=> 'required | string',
-                    'content'=> 'required | string|max:100',
-                    'author'=> 'required | string',
-                    // 'published'=> 'required | boolean',
+        //     $request-> validate(
+        //         [
+        //             'title'=> 'required | string',
+        //             'content'=> 'required | string|max:100',
+        //             'author'=> 'required | string',
+        //             // 'published'=> 'required | boolean',
 
-                ]
-                );
+        //         ]
+        //         );
+        $messages = [
+            'title.required' => 'Title is required',
+            'content.required' => 'price is required',
+            'author.required' => 'description is required',
+          
+        ];
+        
+      $data = $request->validate(
+        [
+            'title'=> 'required | string',
+            'content'=> 'required | string',
+            'author'=> 'required | string|max:100',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ]
+        , $messages );
+        $imageName=$this->uploadFile($request->image, 'assets/images');
+        $data['image'] = $imageName;
+        $data['published'] = isset($request['published']);
                 news::create($data);
         return "your News title is " . $request->title . "<br> and content is " . $request->content . "<br>  and published is " . $request->published  . "<br>  and author is " . $request->author ;
 

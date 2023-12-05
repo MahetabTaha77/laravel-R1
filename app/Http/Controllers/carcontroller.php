@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Traits\common;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -8,12 +9,15 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\cars;
 
 class CarController extends Controller
-{
+{    //you must calling common method to get upload image code App\Traits\common;
+    use common;
+
     private $columns=[
         'carTitle',
         'description',
         'published',
         'price',
+        'image',
     ];
     /**
      * Display a listing of the resource.
@@ -65,24 +69,48 @@ class CarController extends Controller
             //     $cars->published = 0;
             // }
 
-            //validaion
-            $data = ($request->only($this->columns));
-            $data['published'] = isset($data['published'])? true:false;
+                //for Replace Laravel Image to News error message
+            $messages = [
+                'carTitle.required' => 'Title is required',
+                'price.required' => 'price is required',
+                'description.required' => 'description is required',
+              
+            ];
+            //validation 
+          $data = $request->validate(
+            [
+                'carTitle'=> 'required | string',
+                'price'=> 'required | integer',
+                'description'=> 'required | string|max:100',
+                'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            ]
+            , $messages );
 
-            $request-> validate(
-                [
-                    'carTitle'=> 'required | string',
-                    'price'=> 'required | integer',
-                    'description'=> 'required | string|max:100',
-                    // 'published'=> 'required | boolean',
+            //after added image in validation you must added request image folder
+            $imageName=$this->uploadFile($request->image, 'assets/images');
+            $data['image'] = $imageName;
+            $data['published'] = isset($request['published']);
+           
 
-                ]
-                );
+               
+            //عشان اطبع في الداتا بيز
                 cars::create($data);
                 return "your car title is " . $request->carTitle . "<br> and price is " . $request->price . "<br>  and description is " . $request->description . "<br>  and published is " . $request->published;
 
             
-            
+             //validaion
+            // $data = ($request->only($this->columns));
+
+            // $request-> validate(
+            //     [
+            //         'carTitle'=> 'required | string',
+            //         'price'=> 'required | integer',
+            //         'description'=> 'required | string|max:100',
+            //         // 'published'=> 'required | boolean',
+
+            //     ]
+            //     );
+
             // $car = new cars;
             // $car->carTitle = "BMW";
             // $car->price = 10000;
@@ -119,8 +147,9 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $data['image'] =$this->uploadFile($request->image, 'assets/images');
         $data = $request->only($this->columns);
-        $data['published'] = isset($data['published'])? true:false;
+        $data['published'] = isset($data['published']);
         cars::where('id', $id)->update($data);
 
         // cars::where('id' ,$id)->update($request->only($this->columns));

@@ -17,7 +17,7 @@
     </div>
   @endif
   <h2>Add Car</h2>
-  <form name="addcar" id="addcar" method="post" action="{{url('cars-data')}}">
+  <form name="addcar" id="addcar" method="post" action="{{url('cars-data')}}"  enctype="multipart/form-data">
 
     @csrf
     <div class="form-group">
@@ -39,6 +39,7 @@
      @enderror
     
     </div>
+    
     <div class="form-group">
         <label for="description">Description:</label>
         <textarea class="form-control" rows="5" id="description" name="description">{{ old('description') }}</textarea>
@@ -48,6 +49,13 @@
       </div>
      @enderror
       </div> 
+      <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}">
+            @error('image')
+                {{ $message }}
+            @enderror
+        </div>
     <div class="checkbox">
       <label><input type="checkbox" name="published"> Published</label>
     </div>
