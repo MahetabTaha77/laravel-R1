@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Update Car</title>
+  <title>Add Post</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -16,37 +16,50 @@
         {{ session('status') }}
     </div>
   @endif
-  <h2>Add Car</h2>
-  <form name="addcar" id="addcar" method="post" action="{{ route('updatecar',$cars->id)  }}" enctype="multipart/form-data">
+  <h2>Add Post</h2>
+  <form name="post" id="post" method="post" action="{{url('Posts-data')}}"  enctype="multipart/form-data">
 
     @csrf
-    @method('put')
     <div class="form-group">
       <label for="title">Title:</label>
-      <input type="text" class="form-control" id="title" placeholder="Enter title" name="carTitle" value="{{ $cars->carTitle }}">
+      <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" value="{{ old('title') }}">
+     @error('title')
+     <div class="alert alert-warning">
+      {{ $message }}
+      </div>
+     @enderror
     </div>
     <div class="form-group">
       <label for="price">Price:</label>
-      <input type="number" class="form-control" id="price" placeholder="Enter Price" name="price"  value="{{ $cars->price }}">
-
+      <input type="number" class="form-control" id="price" placeholder="Enter Price" name="price" value="{{ old('price') }}">
+      @error('price')
+      <div class="alert alert-warning">
+      {{ $message }}
+      </div>
+     @enderror
+    
     </div>
+    
     <div class="form-group">
-        <label for="description">Content :</label>
-        <textarea class="form-control" rows="5" id="description" name="description"> {{$cars->description}}</textarea>
-       
+        <label for="description">ShortDescription:</label>
+        <textarea class="form-control" rows="5" id="description" name="ShortDescription">{{ old('ShortDescription') }}</textarea>
+        @error('ShortDescription')
+        <div class="alert alert-warning">
+      {{ $message }}
+      </div>
+     @enderror
       </div> 
       <div class="form-group">
             <label for="image">Image:</label>
             <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}">
-            <img src=" {{ asset('assets/images/'.$cars->image) }} " alt="cars" style="width:250px;">
             @error('image')
                 {{ $message }}
             @enderror
         </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="published" @checked($cars->published)> Published</label>
+      <label><input type="checkbox" name="published"> Published</label>
     </div>
-    <button type="submit" class="btn btn-default">Update</button>
+    <button type="submit" class="btn btn-default">Add</button>
   </form>
 </div>
 

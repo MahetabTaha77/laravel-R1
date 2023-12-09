@@ -70,12 +70,8 @@ class CarController extends Controller
             // }
 
                 //for Replace Laravel Image to News error message
-            $messages = [
-                'carTitle.required' => 'Title is required',
-                'price.required' => 'price is required',
-                'description.required' => 'description is required',
-              
-            ];
+                $messages= $this->messages();
+
             //validation 
           $data = $request->validate(
             [
@@ -147,18 +143,55 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data['image'] =$this->uploadFile($request->image, 'assets/images');
-        $data = $request->only($this->columns);
-        $data['published'] = isset($data['published']);
-        cars::where('id', $id)->update($data);
+        //upload code by validation
+        $messages= $this->messages();
 
-        // cars::where('id' ,$id)->update($request->only($this->columns));
+        $data = $request->validate([
+            'carTitle'=>'required|string',
+            'description'=>'required|string',
+            'price' => 'required|string',
+            'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+        ], $messages);
+       
+        $data['published'] = isset($request->published);
+
+        // update image if new file selected
+        if($request->hasFile('image')){
+            $fileName = $this->uploadFile($request->image, 'assets/images');
+            $data['image']= $fileName;
+        }
+
+        //return dd($data);
+        cars::where('id', $id)->update($data);
         return redirect('cars');
+
+        // $data['image'] =$this->uploadFile($request->image, 'assets/images');
+        // $data = $request->only($this->columns);
+        // $data['published'] = isset($data['published']);
+        // cars::where('id', $id)->update($data);
+
+        // // cars::where('id' ,$id)->update($request->only($this->columns));
+        // return redirect('cars');
+
+
     }
 
     /**
+     *  Message method 
+     */
+
+  public function messages(){
+        return [
+            'carTitle.required' => 'Title is required',
+            'price.required' => 'price is required',
+            'description.required' => 'description is required',
+        ];
+    }
+
+     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy(string $id): RedirectResponse
     {
         //
