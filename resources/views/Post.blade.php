@@ -27,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-        @foreach($Post as $Post)
+        @foreach($Posts as $Post)
         <tr>
         <td>{{ $Post->title}}</td>
         <td> {{ $Post->ShortDescription}} </td>
@@ -37,7 +37,9 @@
             @else
             no  ❌  
             @endif
+
         </td>
+        <td> {{ $Post->price}} </td>
         <td><a href="editPost/{{ $Post->id }}" >Edit</a</td>
         <td><a href="ShowPost/{{ $Post->id }}" >Show</a</td>
         <td><a href="deletePost/{{ $Post->id }}" >Delete</a</td>

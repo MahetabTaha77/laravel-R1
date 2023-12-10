@@ -64,16 +64,21 @@ Route::get('showupload',[ExampleController::class,'showupload']);
 Route::post('uploadImages',[ExampleController::class,'uploadImages'])->name('uploadImages');
 
 
-Route::get('home',[ExampleController::class,'home']);
+// Route::get('home',[ExampleController::class,'home']);
 
 Route::get('blog',[ExampleController::class,'blog']);
 
-Route::get('includes.explore',[PostController::class,'index']);
+
+
+
+// Route::get('home',[PostController::class,'index']);
 
 Route::get('includes.explore',[PostController::class,'store']);
 Route::get('Post',[PostController::class,'index']);
 Route::get('addPost',[PostController::class,'create']);
 Route::post('Posts-data', [PostController::class,'store'])->name('Posts-data');
+Route::get('deletePost/{id}', [PostController::class,'destroy']);
+Route::get('delete/{id}', [PostController::class,'Delete']);
 
 
 // Route::get('user/{name}',function($name){

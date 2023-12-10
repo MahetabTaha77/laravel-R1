@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Traits\common;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
 {
@@ -22,8 +23,9 @@ class PostController extends Controller
     public function index()
     {
         //
-        $Post = Post::get();
-        return view("Post" ,compact('Post'));
+        // $Posts = Post::latest()->take(5)->get();
+       $Posts = Post::get();
+        return view("Post" ,compact('Posts'));
     }
 
     /**
@@ -94,9 +96,11 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id):RedirectResponse
     {
         //
+        Post::where('id', $id)->delete();
+        return redirect('Post');
     }
     public function messages(){
         return [
@@ -104,5 +108,11 @@ class PostController extends Controller
             'price.required' => 'price is required',
             'ShortDescription.required' => 'ShortDescription is required',
         ];
+    }
+    public function Delete(string $id)
+    {
+       //for display form database row values
+       Post::where('id', $id)->forceDelete();
+       return redirect('Post');
     }
 }

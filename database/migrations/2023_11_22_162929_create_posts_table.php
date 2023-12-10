@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('published');
             $table->string('image',100);
             $table->timestamps();
+
         });
     }
 
