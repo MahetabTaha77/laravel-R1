@@ -28,7 +28,9 @@
         <th>Car Published : {{ $cars->published}} </th><br>
       </tr>
       
-     
+      <tr>
+        <th>Car category : {{  $cars->category->categoryName }} </th><br>
+      </tr>
     </thead>
     
   </table>

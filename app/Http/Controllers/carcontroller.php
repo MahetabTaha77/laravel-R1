@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 use App\Models\cars;
+use App\Models\Category;
 
 class CarController extends Controller
 {    //you must calling common method to get upload image code App\Traits\common;
@@ -18,6 +19,7 @@ class CarController extends Controller
         'published',
         'price',
         'image',
+        'category_id',
     ];
     /**
      * Display a listing of the resource.
@@ -35,7 +37,8 @@ class CarController extends Controller
     public function create()
     {
         //
-        return view("addcar");
+        $categories = Category::select('id','categoryName')->get();
+        return view("addcar",compact('categories'));
         
     }
 
@@ -77,8 +80,11 @@ class CarController extends Controller
             [
                 'carTitle'=> 'required | string',
                 'price'=> 'required | integer',
+                'price'=> 'required | integer',
                 'description'=> 'required | string|max:100',
                 'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+                'category_id'=> 'required | integer',
+                
             ]
             , $messages );
 
@@ -91,7 +97,7 @@ class CarController extends Controller
                
             //عشان اطبع في الداتا بيز
                 cars::create($data);
-                return "your car title is " . $request->carTitle . "<br> and price is " . $request->price . "<br>  and description is " . $request->description . "<br>  and published is " . $request->published;
+                return "your car title is " . $request->carTitle . "<br> and price is " . $request->price . "<br>  and description is " . $request->description . "<br>  and published is " . $request->published . "<br>  and Category is " . $request->category_id;
 
             
              //validaion
@@ -135,7 +141,8 @@ class CarController extends Controller
     {
        //for display form database row values
        $cars=cars::findOrFail($id);
-       return view("updatecar",compact('cars'));
+        $categories = Category::select('id', 'categoryName')->get();
+        return view("updatecar",compact('cars','categories'));
     }
 
     /**
@@ -150,6 +157,7 @@ class CarController extends Controller
             'carTitle'=>'required|string',
             'description'=>'required|string',
             'price' => 'required|string',
+            'category_id' => 'required|string',
             'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
         ], $messages);
        

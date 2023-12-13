@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('description');
             $table->boolean('published');
             $table->string('image',100);
+            $table->foreignId('category_id')->constrained('categories');
+            // $table->foreignId('user_id')->constrained('users');
             $table->softDeletes();//بيسجل المهزوف بالتسجيل و تاريج الحذف
             $table->timestamps();
         });
