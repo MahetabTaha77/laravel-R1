@@ -5,9 +5,11 @@ use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ContactsController;
+
+use App\Mail\Contacts;
 use App\Traits\common;
-
-
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +66,6 @@ Route::get('showupload',[ExampleController::class,'showupload']);
 Route::post('uploadImages',[ExampleController::class,'uploadImages'])->name('uploadImages');
 
 
-// Route::get('home',[ExampleController::class,'home']);
 
 Route::get('blog',[ExampleController::class,'blog']);
 
@@ -81,6 +82,7 @@ Route::get('deletePost/{id}', [PostController::class,'destroy']);
 Route::get('delete/{id}', [PostController::class,'Delete']);
 
 
+Auth::routes(['verify'=>true]);
 // Route::get('user/{name}',function($name){
 //     return ('The User Name Is:' .$name);
 // });
@@ -264,3 +266,12 @@ Route::get('delete/{id}', [PostController::class,'Delete']);
 // Route::post ('receive',function(){ 
 //     return 'Data received';
 // })->name('received');
+
+Auth::routes();
+
+Route::get('/home', [PostController::class, 'index'])->name('home');
+
+
+
+ Route::get('/contacts', [ContactsController::class, 'index']);
+ Route::post('/contactus', [ContactsController::class, 'SubmitContactForm'])->name('contactus');

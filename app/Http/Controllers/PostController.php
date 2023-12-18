@@ -25,7 +25,7 @@ class PostController extends Controller
         //
         // $Posts = Post::latest()->take(5)->get();
        $Posts = Post::get();
-        return view("Post" ,compact('Posts'));
+        return view("home" ,compact('Posts'));
     }
 
     /**

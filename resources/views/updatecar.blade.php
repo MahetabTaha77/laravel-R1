@@ -50,8 +50,8 @@
 
                 @foreach ($categories as $category )
 
-                 <option value="{{$category->id }}">{{ $category->categoryName }}</option>
-
+                 <option value="{{$category->id }}" @selected( $category->id == $cars->category_id)>{{ $category->categoryName }}</option>
+                  
                 @endforeach
                 </select>
         </div>
@@ -64,3 +64,4 @@
 
 </body>
 </html>
+<!-- @selected( $category->categoryName == $cars->category->categoryName) -->
