@@ -6,6 +6,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Middleware\EnsureTokenIsValid;
 
 use App\Mail\Contacts;
 use App\Traits\common;
@@ -32,10 +33,11 @@ Route::get('/', function () {
 Route::get('addcar',[CarController::class,'create']);
 Route::post('cars-data', [CarController::class,'store'])->name('cars-data');
 
+
 Route::get('addnews',[NewsController::class,'create']);
 Route::post('news-data', [NewsController::class,'store'])->name('news-data');
 
-Route::get('cars',[CarController::class,'index']);
+Route::get('cars',[CarController::class,'index'])->middleware('verified');
 Route::get('editCar/{id}', [CarController::class,'edit']);
 Route::put('updatecar/{id}', [CarController::class,'update'])->name('updatecar');
 
@@ -83,6 +85,20 @@ Route::get('delete/{id}', [PostController::class,'Delete']);
 
 
 Auth::routes(['verify'=>true]);
+
+Route::get('session',[ExampleController::class,'mysession']);
+
+Auth::routes();
+
+Route::get('/home', [PostController::class, 'index'])->name('home');
+
+
+
+ Route::get('/contacts', [ContactsController::class, 'index']);
+ Route::post('/contactus', [ContactsController::class, 'SubmitContactForm'])->name('contactus');
+
+Route::post('/contactus', [ContactsController::class, 'show'])->middleware('auth');
+
 // Route::get('user/{name}',function($name){
 //     return ('The User Name Is:' .$name);
 // });
@@ -267,11 +283,3 @@ Auth::routes(['verify'=>true]);
 //     return 'Data received';
 // })->name('received');
 
-Auth::routes();
-
-Route::get('/home', [PostController::class, 'index'])->name('home');
-
-
-
- Route::get('/contacts', [ContactsController::class, 'index']);
- Route::post('/contactus', [ContactsController::class, 'SubmitContactForm'])->name('contactus');

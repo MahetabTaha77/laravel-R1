@@ -52,6 +52,14 @@ class ExampleController extends Controller
     //     $request->image->move($path, $file_name);
     //     return 'Uploaded';
     // }
-    
+    public function mysession()
+    {
+        //
+        session()->put('test','First Laravel Session');
+        // session()->forget('test');
+        // session()->flash('test');
+        $data = session('test');
+        return view('session',compact('data'));
+    }
     
 }

@@ -18,12 +18,7 @@ class CategoryFactory extends Factory
     {
         return [
             //
-            'carTitle' => fake()->company(),
-            'price' => fake()->numberBetween($min = 6000, $max = 12000),        
-             'description' => fake()->text(),
-            'published' => 1,
-            'image' => fake()->imageUrl(800,600),
-            
+            'categoryName' => fake()->company(),
         ];
     }
 }

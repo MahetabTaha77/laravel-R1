@@ -21,6 +21,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        //هنا بضيف الربط بين الميديل وير و الكيرنيل
+        \App\Http\Middleware\AuthMiddleware::class,
     ];
 
     /**

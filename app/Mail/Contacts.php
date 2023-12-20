@@ -21,6 +21,7 @@ class Contacts extends Mailable
     public function __construct(protected $contacts)
     {
         //
+        
     }
 
     /**

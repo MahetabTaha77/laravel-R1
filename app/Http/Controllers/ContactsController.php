@@ -54,6 +54,7 @@ class ContactsController extends Controller
     public function show(string $id)
     {
         //
+        $this->middleware('auth');
     }
 
     /**
