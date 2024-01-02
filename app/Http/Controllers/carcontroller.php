@@ -190,9 +190,9 @@ class CarController extends Controller
 
   public function messages(){
         return [
-            'carTitle.required' => 'Title is required',
-            'price.required' => 'price is required',
-            'description.required' => 'description is required',
+            'carTitle.required' => __('addcar.titleRequiredMsg'),
+            'price.required' =>  __('addcar.priceRequiredMsg'),
+            'description.required' =>  __('addcar.descriptionRequiredMsg'),
         ];
     }
 

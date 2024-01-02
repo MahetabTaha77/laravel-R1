@@ -6,7 +6,6 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ContactsController;
-use App\Http\Middleware\EnsureTokenIsValid;
 
 use App\Mail\Contacts;
 use App\Traits\common;
@@ -96,8 +95,19 @@ Route::get('/home', [PostController::class, 'index'])->name('home');
 
  Route::get('/contacts', [ContactsController::class, 'index']);
  Route::post('/contactus', [ContactsController::class, 'SubmitContactForm'])->name('contactus');
+ Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ //...
+        Route::get('/contacts', [ContactsController::class, 'index']);
+        Route::post('/contactus', [ContactsController::class, 'SubmitContactForm'])->name('contactus');
 
-Route::post('/contactus', [ContactsController::class, 'show'])->middleware('auth');
+        Route::get('addcar', [CarController::class, 'create']);
+        Route::post('cars-data', [CarController::class,'store'])->name('cars-data');
+    });
+
+// Route::post('/contactus', [ContactsController::class, 'show'])->name('contactus');
 
 // Route::get('user/{name}',function($name){
 //     return ('The User Name Is:' .$name);

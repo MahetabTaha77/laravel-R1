@@ -17,9 +17,9 @@ class AuthMiddleware
     {
         //إنشاء Middleware للتحقق من أن المستخدم مسجل الدخول قبل السماح له بالوصول إلى مسار معين.
         
-        if (!auth()->check()) {
-            return redirect('login');
-        }
+        // if (!auth()->check()) {
+        //     return redirect('register');
+        // }
     
         return $next($request);
     }
