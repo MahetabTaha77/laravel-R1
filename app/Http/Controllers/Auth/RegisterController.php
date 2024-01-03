@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'number' => $data['number'],
             'password' => Hash::make($data['password']),
+            'expired' => 0,
         ]);
     }
 }
